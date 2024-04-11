@@ -6,7 +6,7 @@ public class score {
     public int dy = 0;
     public int xpos;
     public int ypos;
-    public int width = 175;
+    public int width = 250;
     public int height = 75;
     public boolean isAlive = true;
     public Rectangle rec;

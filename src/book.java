@@ -9,7 +9,7 @@ public class book {
     public int ypos;
     public int width = 75;
     public int height = 75;
-    public boolean isAlive = false;
+    public boolean isAlive = true;
     public Rectangle rec;
 
     public book(int paramXpos, int paramYpos){
@@ -22,6 +22,8 @@ public class book {
 
         xpos = xpos + dx;
         ypos = ypos + dy;
+        rec = new Rectangle (xpos, ypos, width, height);
+
     }
 
 

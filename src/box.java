@@ -21,23 +21,6 @@ public class box {
     public void move(){
         xpos = xpos + dx;
         ypos = ypos + dy;
-
-//        if(ypos < 0){
-//            dy = -dy;
-//        }
-//
-//        if(xpos < 0){
-//            dx = -dx;
-//        }
-//
-//        if(ypos + height > 700){
-//            dy = -dy;
-//        }
-//
-//        if(xpos + width > 1000){
-//            dx = -dx;
-//        }
-
         rec = new Rectangle(xpos, ypos, width, height);
 
     }
