@@ -3,7 +3,7 @@ import java.awt.*;
 public class box {
 
     public Image pic;
-    public int dx = -1;
+    public int dx = -2;
     public int dy = 0;
     public int xpos;
     public int ypos;

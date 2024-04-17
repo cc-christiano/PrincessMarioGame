@@ -96,7 +96,7 @@ public class GameHQ implements Runnable, KeyListener {
         }
 
         for(int x = 0; x < boxes.length; x = x +1) {
-            if (Math.random() < .1 && boxes[x].isAlive == false && x < boxes.length-2) {
+            if (Math.random() < .15 && boxes[x].isAlive == false && x < boxes.length-2) {
                 boxes[x].isAlive = true;
                 boxes[x+1].isAlive = true;
                 boxes[x+2].isAlive = true;
@@ -111,7 +111,7 @@ public class GameHQ implements Runnable, KeyListener {
         }//level 2
 
         for(int x = 0; x < boxes2.length; x = x +1) {
-            if (Math.random() < .1 && boxes2[x].isAlive == false && x < boxes2.length - 2) {
+            if (Math.random() < .15 && boxes2[x].isAlive == false && x < boxes2.length - 2) {
                 boxes2[x].isAlive = true;
                 boxes2[x + 1].isAlive = true;
                 boxes2[x+2].isAlive = true;
@@ -283,10 +283,10 @@ public class GameHQ implements Runnable, KeyListener {
             g.drawString("Press enter to begin!!", 250,200);
             g.setFont(new Font("Times New Roman", Font.PLAIN, 30));
             g.drawString("You are Belle!", 400, 300 );
-            g.drawString("Try to collect as many books as possible and make it to the end!", 125, 330);
+            g.drawString("Try to collect as many books as possible before you reach the castle!", 125, 330);
             g.drawString("Press the right arrow to go right", 270, 360);
             g.drawString("Press the left arrow to go left", 300,390);
-            g.drawString("Press the space bar to jump", 330,420);
+            g.drawString("Press the up arrow to jump", 330,420);
             g.drawString("Have fun!", 400,450);
 
 
