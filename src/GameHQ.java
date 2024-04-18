@@ -85,7 +85,7 @@ public class GameHQ implements Runnable, KeyListener {
         book1Pic = Toolkit.getDefaultToolkit().getImage("book2.png");
         score = new score(50,50);
         scorePic = Toolkit.getDefaultToolkit().getImage("score.png");
-        castle = new castle(3400,500);
+        castle = new castle(3400,400);
         castlePic = Toolkit.getDefaultToolkit().getImage("castle.png");
         books = new book[10000];
         song = new SoundFile("Arcade Action 05.wav");
@@ -296,7 +296,6 @@ public class GameHQ implements Runnable, KeyListener {
         else if(gamePlaying == true && gameOver == false) {
             g.drawImage(belleVill, 0, 0, 1000, 700, null);
             g.drawImage(bellePic, belle.xpos, belle.ypos, belle.width, belle.height, null);
-            g.drawRect(belle.rec.x, belle.rec.y, belle.rec.width, belle.rec.height);
 //                g.drawRect(belle.rec.x, belle.rec.y, belle.rec.width, belle.rec.height);
             for (int x = 0; x < boxes.length; x++) {
                 if (boxes[x].isAlive == true) {

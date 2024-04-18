@@ -2,12 +2,12 @@ import java.awt.*;
 
 public class castle {
     public Image pic;
-    public int dx = -1;
+    public int dx = -2;
     public int dy = 0;
     public int xpos;
     public int ypos;
-    public int width = 200;
-    public int height = 200;
+    public int width = 300;
+    public int height = 300;
     public boolean isAlive = true;
     public Rectangle rec;
 
