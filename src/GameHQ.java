@@ -39,8 +39,9 @@ public class GameHQ implements Runnable, KeyListener {
     public BufferStrategy bufferStrategy;
 
     public boolean gamePlaying = false;
-    public boolean gameOver = false;
+    public boolean gameOver1 = false;
     public boolean isPaused = false;
+    public boolean gameOver2 = false;
 
     public Princess belle;
     public Image bellePic;
@@ -53,11 +54,16 @@ public class GameHQ implements Runnable, KeyListener {
     public score score;
     public Image scorePic;
     public Image startScreen;
-    public Image winScreen;
+    public Image winScreenC;
     public castle castle;
     public Image castlePic;
     public book[] books;
     public SoundFile song;
+    public Princess cinderella;
+    public Image cinderellaPic;
+    public Image palace;
+    public Image endGameC;
+
 
     // Main method definition
     // This is the code that runs first and automatically
@@ -89,6 +95,11 @@ public class GameHQ implements Runnable, KeyListener {
         castlePic = Toolkit.getDefaultToolkit().getImage("castle.png");
         books = new book[10000];
         song = new SoundFile("Arcade Action 05.wav");
+        cinderella = new Princess ("cinderella", 0,700);
+        cinderella.ypos = 700-cinderella.height;
+        cinderellaPic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
+        palace = Toolkit.getDefaultToolkit().getImage("palace.png");
+        endGameC = Toolkit.getDefaultToolkit().getImage("endScreenC.png");
 
         for(int x = 0; x < boxes.length; x = x +1) {
             boxes[x] = new box(x * 75 + 775, 625);
@@ -143,7 +154,7 @@ public class GameHQ implements Runnable, KeyListener {
 //            }
 //        }
 
-        winScreen = Toolkit.getDefaultToolkit().getImage("winScreen2.png");
+        winScreenC = Toolkit.getDefaultToolkit().getImage("winScreen2.png");
 
         //variable and objects
         //create (construct) the objects needed for the game
@@ -161,7 +172,7 @@ public class GameHQ implements Runnable, KeyListener {
     public void run() {
         //for the moment we will loop things forever.
         while (true) {
-            if (gamePlaying == true && gameOver == false) {
+            if (gamePlaying == true && gameOver2 == false) {
                 moveThings();  //move all the game objects
             }
             render();  // paint the graphics
@@ -224,7 +235,9 @@ public class GameHQ implements Runnable, KeyListener {
 
         //jumping
         if(belle.rec.intersects(castle.rec)){
-            gameOver = true;
+            gameOver1 = true;
+            levelup();
+            gameOver1 = false;
         } //belle getting book
         belle.xpos = belle.xpos +belle.dx;
         if(belle.rightIsPressed == true) {
@@ -264,8 +277,15 @@ public class GameHQ implements Runnable, KeyListener {
             books[x].move();
         }
 
-        castle.move(); //side scroller castel
+        castle.move(); //side scroller castle
+    }
 
+    public void levelup() {
+        if(gameOver1 == true) {
+            bellePic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
+            belleVill = Toolkit.getDefaultToolkit().getImage("palace.png");
+            book1Pic = Toolkit.getDefaultToolkit().getImage("glassSlipper.png");
+        }
     }
 
     //Paints things on the screen using bufferStrategy
@@ -293,7 +313,8 @@ public class GameHQ implements Runnable, KeyListener {
 
         } // start screen
 
-        else if(gamePlaying == true && gameOver == false) {
+        else if(gamePlaying == true && gameOver1 == false && gameOver2 == false) {
+
             g.drawImage(belleVill, 0, 0, 1000, 700, null);
             g.drawImage(bellePic, belle.xpos, belle.ypos, belle.width, belle.height, null);
 //                g.drawRect(belle.rec.x, belle.rec.y, belle.rec.width, belle.rec.height);
@@ -328,25 +349,19 @@ public class GameHQ implements Runnable, KeyListener {
             g.setColor(Color.BLACK);
             g.drawString("Points: " + belle.points, 57, 100);
             g.drawImage(castlePic, castle.xpos, castle.ypos, castle.width, castle.height, null);
+
         }
         // game play
 
 
-        else if(gameOver == true){
-            g.drawImage(winScreen, 0, 0, 1000, 700, null);
+        else if(gameOver2 == true && gameOver1 == false){
+            g.drawImage(winScreenC, 0, 0, 1000, 700, null);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Snell RoundHand", Font.PLAIN, 60));
             g.drawString("YOU WIN!", 400, 330);
-
-
-        } // you win screen belle goes into sewer thing
-
-        // game is over
-
-
-
-
-        //draw the images
+            g.setFont(new Font("Snell RoundHand", Font.PLAIN, 40));
+            g.drawString("Press the C key to move on to the next level!", 300,360);
+        } // you win screen after belle goes into castle and also this leads to next level
 
         g.dispose();
         bufferStrategy.show();
@@ -414,7 +429,6 @@ public class GameHQ implements Runnable, KeyListener {
         if(keyCode == 37) {
             belle.leftIsPressed = true;
         }
-
     }
 
     @Override
@@ -430,6 +444,11 @@ public class GameHQ implements Runnable, KeyListener {
 
         if(keyCode == 10){
             gamePlaying = true;
+        }
+
+        if(keyCode == 67){
+            gameOver1 = true;
+            gamePlaying = false;
         }
     }
 }

@@ -7,8 +7,8 @@ public class Princess {
     public int ypos;
     public int dx = 0;
     public int dy = 2;
-    public int height = 200;
-    public int width = 150;
+    public int height = 100;
+    public int width = 75;
     public boolean isAlive;
     public Rectangle rec;
     public boolean isJumping = false;
