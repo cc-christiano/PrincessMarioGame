@@ -63,6 +63,8 @@ public class GameHQ implements Runnable, KeyListener {
     public Image cinderellaPic;
     public Image palace;
     public Image endGameC;
+    public castle castleC;
+    public Image castleCPic;
 
 
     // Main method definition
@@ -100,6 +102,8 @@ public class GameHQ implements Runnable, KeyListener {
         cinderellaPic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
         palace = Toolkit.getDefaultToolkit().getImage("palace.png");
         endGameC = Toolkit.getDefaultToolkit().getImage("endScreenC.png");
+        castleC = new castle(6800,400);
+        castleCPic = Toolkit.getDefaultToolkit().getImage("castleC.png");
 
         for(int x = 0; x < boxes.length; x = x +1) {
             boxes[x] = new box(x * 75 + 775, 625);
@@ -154,7 +158,7 @@ public class GameHQ implements Runnable, KeyListener {
 //            }
 //        }
 
-        winScreenC = Toolkit.getDefaultToolkit().getImage("winScreen2.png");
+        winScreenC = Toolkit.getDefaultToolkit().getImage("endGame.png");
 
         //variable and objects
         //create (construct) the objects needed for the game
@@ -277,7 +281,12 @@ public class GameHQ implements Runnable, KeyListener {
             books[x].move();
         }
 
+        if(belle.rec.intersects(castleC.rec)){
+            gameOver2 = true;
+        }
+
         castle.move(); //side scroller castle
+        castleC.move(); // side scroller for cinderella castle
     }
 
     public void levelup() {
@@ -285,6 +294,7 @@ public class GameHQ implements Runnable, KeyListener {
             bellePic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
             belleVill = Toolkit.getDefaultToolkit().getImage("palace.png");
             book1Pic = Toolkit.getDefaultToolkit().getImage("glassSlipper.png");
+
         }
     }
 
@@ -349,6 +359,7 @@ public class GameHQ implements Runnable, KeyListener {
             g.setColor(Color.BLACK);
             g.drawString("Points: " + belle.points, 57, 100);
             g.drawImage(castlePic, castle.xpos, castle.ypos, castle.width, castle.height, null);
+            g.drawImage(castleCPic, castleC.xpos, castleC.ypos, castleC.width, castleC.height, null);
 
         }
         // game play
@@ -356,12 +367,12 @@ public class GameHQ implements Runnable, KeyListener {
 
         else if(gameOver2 == true && gameOver1 == false){
             g.drawImage(winScreenC, 0, 0, 1000, 700, null);
-            g.setColor(Color.WHITE);
+            g.setColor(Color.BLACK);
             g.setFont(new Font("Snell RoundHand", Font.PLAIN, 60));
-            g.drawString("YOU WIN!", 400, 330);
-            g.setFont(new Font("Snell RoundHand", Font.PLAIN, 40));
-            g.drawString("Press the C key to move on to the next level!", 300,360);
+            g.drawString("YOU WIN!", 390, 330);
         } // you win screen after belle goes into castle and also this leads to next level
+
+
 
         g.dispose();
         bufferStrategy.show();
