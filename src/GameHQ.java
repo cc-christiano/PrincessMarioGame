@@ -293,7 +293,25 @@ public class GameHQ implements Runnable, KeyListener {
         if(gameOver1 == true) {
             bellePic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
             belleVill = Toolkit.getDefaultToolkit().getImage("palace.png");
-            book1Pic = Toolkit.getDefaultToolkit().getImage("glassSlipper.png");
+            for(int x = 0; x < books.length; x = x + 1){
+                books[x].pic = Toolkit.getDefaultToolkit().getImage("glassSlipper.png");
+            }
+
+            for(int x = 0; x < boxes.length; x = x +1) {
+                boxes[x].pic = Toolkit.getDefaultToolkit().getImage("blueBox.png");
+            }
+
+            for(int x = 0; x < boxes2.length; x = x +1){
+                boxes2[x].pic = Toolkit.getDefaultToolkit().getImage("blueBox.png");
+
+            }
+
+            for(int x = 0; x < boxesJump.length; x = x +1){
+                boxesJump[x].pic = Toolkit.getDefaultToolkit().getImage("blueBox.png");
+
+            }
+
+            castle.isAlive = false;
 
         }
     }
@@ -369,7 +387,7 @@ public class GameHQ implements Runnable, KeyListener {
             g.drawImage(winScreenC, 0, 0, 1000, 700, null);
             g.setColor(Color.BLACK);
             g.setFont(new Font("Snell RoundHand", Font.PLAIN, 60));
-            g.drawString("YOU WIN!", 390, 330);
+            g.drawString("YOU WIN!", 380, 450);
         } // you win screen after belle goes into castle and also this leads to next level
 
 
