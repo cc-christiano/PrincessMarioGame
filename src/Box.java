@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class box {
+public class Box {
 
     public Image pic;
     public int dx = -2;
@@ -12,7 +12,7 @@ public class box {
     public boolean isAlive = false;
     public Rectangle rec;
 
-    public box(int paramXpos, int paramYpos){
+    public Box(int paramXpos, int paramYpos){
         xpos = paramXpos;
         ypos = paramYpos;
         rec = new Rectangle (xpos, ypos, width, height);

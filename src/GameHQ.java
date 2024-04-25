@@ -14,10 +14,8 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.tools.Tool;
 
 //*******************************************************************************
 
@@ -46,24 +44,24 @@ public class GameHQ implements Runnable, KeyListener {
     public Princess belle;
     public Image bellePic;
     public Image belleVill;
-    public box[] boxes;
-    public box[] boxes2;
-    public box[] boxesJump;
-    public book book1;
+    public Box[] boxes;
+    public Box[] boxes2;
+    public Box[] boxesJump;
+    public Book book1;
     public Image book1Pic;
-    public score score;
+    public Score score;
     public Image scorePic;
     public Image startScreen;
     public Image winScreenC;
-    public castle castle;
+    public Castle castle;
     public Image castlePic;
-    public book[] books;
+    public Book[] books;
     public SoundFile song;
     public Princess cinderella;
     public Image cinderellaPic;
     public Image palace;
     public Image endGameC;
-    public castle castleC;
+    public Castle castleC;
     public Image castleCPic;
 
 
@@ -86,27 +84,27 @@ public class GameHQ implements Runnable, KeyListener {
         belle.ypos = 700-belle.height;
         bellePic = Toolkit.getDefaultToolkit().getImage("Belle.png");
         belleVill = Toolkit.getDefaultToolkit().getImage("belleVillage2.png");
-        boxes = new box[10000];
-        boxes2 = new box[10000];
-        boxesJump = new box[10000];
-        book1 = new book(450,300);
+        boxes = new Box[10000];
+        boxes2 = new Box[10000];
+        boxesJump = new Box[10000];
+        book1 = new Book(450,300);
         book1Pic = Toolkit.getDefaultToolkit().getImage("book2.png");
-        score = new score(50,50);
+        score = new Score(50,50);
         scorePic = Toolkit.getDefaultToolkit().getImage("score.png");
-        castle = new castle(3400,400);
+        castle = new Castle(3400,400);
         castlePic = Toolkit.getDefaultToolkit().getImage("castle.png");
-        books = new book[10000];
+        books = new Book[10000];
         song = new SoundFile("Arcade Action 05.wav");
         cinderella = new Princess ("cinderella", 0,700);
         cinderella.ypos = 700-cinderella.height;
         cinderellaPic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
         palace = Toolkit.getDefaultToolkit().getImage("palace.png");
         endGameC = Toolkit.getDefaultToolkit().getImage("endScreenC.png");
-        castleC = new castle(6800,400);
+        castleC = new Castle(6800,400);
         castleCPic = Toolkit.getDefaultToolkit().getImage("castleC.png");
 
         for(int x = 0; x < boxes.length; x = x +1) {
-            boxes[x] = new box(x * 75 + 775, 625);
+            boxes[x] = new Box(x * 75 + 775, 625);
             boxes[x].pic = Toolkit.getDefaultToolkit().getImage("box.png");
         }
 
@@ -120,7 +118,7 @@ public class GameHQ implements Runnable, KeyListener {
         } //level 1
 
         for(int x = 0; x < boxes2.length; x = x +1){
-            boxes2[x] = new box(x*75 + 850, 550);
+            boxes2[x] = new Box(x*75 + 850, 550);
             boxes2[x].pic = Toolkit.getDefaultToolkit().getImage("box.png");
 
         }//level 2
@@ -134,7 +132,7 @@ public class GameHQ implements Runnable, KeyListener {
         }
 
         for(int x = 0; x < boxesJump.length; x = x +1){
-            boxesJump[x] = new box(x*75 + 370, 370);
+            boxesJump[x] = new Box(x*75 + 370, 370);
             boxesJump[x].pic = Toolkit.getDefaultToolkit().getImage("box.png");
 
         }//boxes too jump on top off
@@ -148,9 +146,9 @@ public class GameHQ implements Runnable, KeyListener {
         }
 
         for(int x = 0; x < books.length; x = x + 1){
-            books[x] = new book((int)(Math.random()*1000000), (int)(Math.random()*700));
+            books[x] = new Book((int)(Math.random()*1000000), (int)(Math.random()*700));
             books[x].pic = Toolkit.getDefaultToolkit().getImage("book2.png");
-        }
+        } //books
 
 //        for(int x = 0; x < books.length; x = x + 1){
 //            if (Math.random() < 0.0000001 && books[x].isAlive == false){
@@ -233,7 +231,7 @@ public class GameHQ implements Runnable, KeyListener {
                 song.play();
             }
 
-        }
+        } // getting the book
 
         belle.ypos = belle.ypos + belle.dy;
 
@@ -279,17 +277,17 @@ public class GameHQ implements Runnable, KeyListener {
 
         for(int x = 0; x < books.length; x++){
             books[x].move();
-        }
+        } // side scroller books
 
         if(belle.rec.intersects(castleC.rec)){
             gameOver2 = true;
-        }
+        } //ending game
 
         castle.move(); //side scroller castle
         castleC.move(); // side scroller for cinderella castle
     }
 
-    public void levelup() {
+    public void levelup() { // change from belle level to cinderella level
         if(gameOver1 == true) {
             bellePic = Toolkit.getDefaultToolkit().getImage("cinderella.png");
             belleVill = Toolkit.getDefaultToolkit().getImage("palace.png");
@@ -369,7 +367,7 @@ public class GameHQ implements Runnable, KeyListener {
                 if (books[x].isAlive == true) {
                     g.drawImage(books[x].pic, books[x].xpos, books[x].ypos, books[x].width, books[x].height, null);
                 }
-            }
+            } //books
 
 
             g.drawImage(scorePic, score.xpos, score.ypos, score.width, score.height, null);
@@ -448,16 +446,16 @@ public class GameHQ implements Runnable, KeyListener {
         if(keyCode == 38 && belle.isJumping == false){
             belle.isJumping = true;
             belle.dy = -20;
-        }
+        } // space bar
 
         if(keyCode == 39){
             belle.rightIsPressed = true;
 
-        }
+        } // right arrow key
 
         if(keyCode == 37) {
             belle.leftIsPressed = true;
-        }
+        } // left arrow key
     }
 
     @Override
@@ -465,20 +463,20 @@ public class GameHQ implements Runnable, KeyListener {
         int keyCode = e.getKeyCode();
         if(keyCode == 39){
             belle.rightIsPressed = false;
-        }
+        } // right arrow key
 
         if(keyCode == 37){
             belle.leftIsPressed = false;
-        }
+        } // left arrow key
 
         if(keyCode == 10){
             gamePlaying = true;
-        }
+        } // enter key
 
         if(keyCode == 67){
             gameOver1 = true;
             gamePlaying = false;
-        }
+        } // c key
     }
 }
 
